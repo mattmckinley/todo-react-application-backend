@@ -55,8 +55,11 @@ app.delete("/tasks/:taskId", function (req, res) {
 });
 
 app.put("/tasks/:taskId", function (req, res) {
-  
-  
+  const taskIdToAmmend = req.params.taskId;
+  let putResponse = {
+    message: `You issued a Put request for ID: ${taskIdToAmmend}`
+  };
+  res.send(putResponse);
 });
 
 module.exports.handler = serverless(app);
