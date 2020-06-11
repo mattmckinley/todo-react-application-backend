@@ -43,8 +43,18 @@ app.post("/tasks", function(req, res) {
 
 app.delete("/tasks/:taskId", function(req, res) {
   const id = req.params.taskId;
+  let someResponse = {
+    message: "You issued a delete request for ID: " + id
+  };
 
-  // Respond to the request somehow
+  if (id > 3) {
+    res.status(404);
+    someResponse = {
+      message: "Task " + id + " does not exist"
+    };
+  };
+
+  res.json(someResponse);
 });
 
 module.exports.handler = serverless(app);
