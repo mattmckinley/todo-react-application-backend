@@ -9,7 +9,27 @@ app.use(cors());
 app.use(bodyParser.json());
 
 app.get("/tasks", function(req, res) {
-  res.send({ tasks: ["water plants", "do dishes", "buy oats"] });
+  const someTasks = [
+    {
+      text: "Watch AWS Lambda videos to get better understanding",
+      completed: false,
+      dueDate: "2020-06-13",
+      id: 1
+    },
+    {
+      text: "JS challenges week 10",
+      completed: false,
+      dueDate: "2020-06-20",
+      id: 2
+    },
+    {
+      text: "Do first draft CV",
+      completed: false,
+      dueDate: "2020-06-20",
+      id: 3
+    }
+  ];
+  res.send({someTasks});
 });
 
 app.post("/tasks", function(req, res) {
