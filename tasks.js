@@ -8,7 +8,7 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-app.get("/tasks", function(req, res) {
+app.get("/tasks", function (req, res) {
   const someTasks = [
     {
       text: "Watch AWS Lambda videos to get better understanding",
@@ -29,32 +29,34 @@ app.get("/tasks", function(req, res) {
       id: 3
     }
   ];
-  res.send({someTasks});
+  res.send({ someTasks });
 });
 
-app.post("/tasks", function(req, res) {
+app.post("/tasks", function (req, res) {
   const text = req.body.text;
-  const date = req.body.date;
-
-  res.json({
-    message: `Received a request to add task ${text} with date ${date}`
+  const date = req.body.dueDate;
+  res.status(201).json({
+    message: `Received a request to add task: ${text}, with date: ${date}`
   });
 });
 
-app.delete("/tasks/:taskId", function(req, res) {
+app.delete("/tasks/:taskId", function (req, res) {
   const id = req.params.taskId;
   let someResponse = {
-    message: "You issued a delete request for ID: " + id
+    message: `You issued a delete request for ID: ${id}`
   };
-
   if (id > 3) {
     res.status(404);
     someResponse = {
-      message: "Task " + id + " does not exist"
+      message: `Task ${id} does not exist`
     };
   };
-
   res.json(someResponse);
+});
+
+app.put("/tasks/:taskId", function (req, res) {
+  
+  
 });
 
 module.exports.handler = serverless(app);
